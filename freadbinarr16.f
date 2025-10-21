@@ -1,10 +1,10 @@
 C READ BINARY DATA
       PROGRAM FREB16
         IMPLICIT NONE
-        CHARACTER(16) FN
+        CHARACTER*16 FN
         INTEGER I
         INTEGER*2 VAL
-        WRITE(0,*)'type filename and press enter'
+        WRITE(*,*)'type filename and press enter'
         READ(*,'(A16)') FN
         OPEN(11, FILE=FN,ACCESS='DIRECT', RECL=2)
         I=1
@@ -14,5 +14,5 @@ C READ BINARY DATA
         GOTO 10  
 20      CONTINUE
         CLOSE(11) 
-        WRITE(0,*),'read ',I-1,'rows'
+        WRITE(*,*) 'read ',I-1,'rows'
       END

@@ -1,0 +1,34 @@
+SHELL=cmd
+#fortran compiler
+FC=ftn77
+#fortran linker
+FL=slink
+#executable file extension
+EEXE=.exe
+#object file extension
+EEXE=.obj
+#list all the source files
+SRC=$(wildcard *.f)
+EXE=$(patsubst %.f,%,$(wildcard *.f))
+OBJ=$(patsubst %.f,%.obj,$(wildcard *.f))
+#flags of the compiler to only compile without linking
+FFLAGS=/LINK 
+#
+FDFLAGS= /out:
+#flags of the linker
+LDFLAGS=
+SRCDIR=.
+OBJDIR=.
+BINDIR=.
+RM=del /Q /D
+MV= move
+f=
+.PHONY: all clean
+all: $(SRC) scountrows.obj scountm.exe
+	FOR %%G IN ( $(SRC) ) DO $(FC) $(FFLAGS) %%G
+scountrows.obj: scountrows.f
+	$(FC) $< 
+scountm.exe: scountm.f scountrows.obj
+	$(FC) $(FFLAGS) $^
+clean:
+	$(RM) $(OBJ) $(EXE)
